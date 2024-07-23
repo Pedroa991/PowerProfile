@@ -53,6 +53,17 @@ class ButtomFuntions:
         powerpf.main(self.path_db, self.path_engref)
         showinfo("Sucesso!", "Resultados obitidos com sucesso!")
 
+    def run_interpolation(self):
+        """Interpola dados do TMI"""
+        if not self.path_engref:
+            tx_error = "Erro: Caminho do arquivo de referência de motor inválido!"
+            print(tx_error)
+            showerror("Erro", tx_error)
+            return
+
+        powerpf.interpolation_eng_ref(self.path_engref)
+        showinfo("Sucesso!", "Resultados obitidos com sucesso!")
+
 
 def put_gadgets_main(app: ctk.CTk) -> None:
     """Coloca gadgets da janela principal"""
@@ -70,10 +81,17 @@ def put_gadgets_main(app: ctk.CTk) -> None:
     bt_run = ctk.CTkButton(
         master=app, text="Executar", fg_color="Red", command=runbt.run_powerpf
     )
+    bt_interpol = ctk.CTkButton(
+        master=app,
+        text="Somente Interpolar",
+        fg_color="Red",
+        command=runbt.run_interpolation,
+    )
 
     bt_engref.place(relx=0.30, rely=0.30, anchor=ctk.CENTER)
     bt_db.place(relx=0.70, rely=0.30, anchor=ctk.CENTER)
-    bt_run.place(relx=0.50, rely=0.6, anchor=ctk.CENTER)
+    bt_run.place(relx=0.30, rely=0.6, anchor=ctk.CENTER)
+    bt_interpol.place(relx=0.70, rely=0.6, anchor=ctk.CENTER)
 
     text_about = powerpf.SCRIPT_VERSION + " - By Pedro Venancio - Sobre / Ajuda"
     lb_about = ctk.CTkLabel(app, text=text_about, text_color="blue")

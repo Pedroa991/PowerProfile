@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import numpy as np
 
-SCRIPT_VERSION = "V1.0"
+SCRIPT_VERSION = "V1.1"
 
 COLS_PARSED = {
     "Load": "float",
